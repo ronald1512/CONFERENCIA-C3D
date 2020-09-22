@@ -1,1 +1,24 @@
-<h1>Hola ronald!</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Entrada</h1>
+            <ngx-codemirror [(ngModel)]="entrada" [options]="{
+                            lineNumbers: true,
+                            theme: 'dracula',
+                            mode: 'javascript',
+                            matchBrackets: true
+                        }"></ngx-codemirror>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Salida</h1>
+            <ngx-codemirror [(ngModel)]="salida" [options]="{
+                lineNumbers: true,
+                theme: 'dracula',
+                mode: 'javascript',
+                matchBrackets: true
+            }"></ngx-codemirror>
+        </div>
+    </div>
+</div>
