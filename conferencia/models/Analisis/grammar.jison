@@ -43,12 +43,20 @@
 /lex
 
 %{
+    //Expresiones
     const Arithmetic = require('../NodoAST/Arithmetic');
+    const Logical = require('../NodoAST/Logical');
     const Constant = require('../NodoAST/Constant');
-    const {TipoA} = require('../NodoAST/Arithmetic');
 
-    const Primitivo = require('../Objeto/Primitivo');
+
+    //Enum
+    const {TipoA} = require('../NodoAST/Arithmetic');
+    const {TipoL} = require('../NodoAST/Logical');
     const {Tipo} = require('../Objeto/Objeto');
+
+    //Objeto
+    const Primitivo = require('../Objeto/Primitivo');
+    
 %}
 
 /* Asociación de operadores y precedencia */
@@ -91,8 +99,8 @@ arithmetic: expr MAS expr       {$$=new Arithmetic.default(@1.first_line, @1.fir
         |   expr DIV expr       {$$=new Arithmetic.default(@1.first_line, @1.first_column,$1, TipoA.DIV, $3);}
         ;
 
-logical:    expr AND expr
-        |   expr OR expr
+logical:    expr AND expr       {$$=new Logical.default(@1.first_line, @1.first_column,$1, TipoL.AND, $3);}
+        |   expr OR expr        {$$=new Logical.default(@1.first_line, @1.first_column,$1, TipoL.OR, $3);}
         ;
 
 relational: expr IGIG expr

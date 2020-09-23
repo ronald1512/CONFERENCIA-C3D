@@ -30,6 +30,6 @@ export class AppComponent implements OnInit {
     KeepData.getInstance().resetAll();
     respuesta.ejecutar();
     this.salida=KeepData.getInstance().codigo;
-    console.log(this.salida);
+    //console.log(this.salida);
   }
 }
