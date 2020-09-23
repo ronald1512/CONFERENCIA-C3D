@@ -45,6 +45,7 @@
 %{
     //Expresiones
     const Arithmetic = require('../NodoAST/Arithmetic');
+    const Relational = require('../NodoAST/Relational');
     const Logical = require('../NodoAST/Logical');
     const Constant = require('../NodoAST/Constant');
 
@@ -52,6 +53,7 @@
     //Enum
     const {TipoA} = require('../NodoAST/Arithmetic');
     const {TipoL} = require('../NodoAST/Logical');
+    const {TipoR} = require('../NodoAST/Relational');
     const {Tipo} = require('../Objeto/Objeto');
 
     //Objeto
@@ -103,10 +105,10 @@ logical:    expr AND expr       {$$=new Logical.default(@1.first_line, @1.first_
         |   expr OR expr        {$$=new Logical.default(@1.first_line, @1.first_column,$1, TipoL.OR, $3);}
         ;
 
-relational: expr IGIG expr
-        |   expr DIFDE expr
-        |   expr MEN expr
-        |   expr MAY expr
+relational: expr IGIG expr      {$$=new Relational.default(@1.first_line, @1.first_column,$1, TipoR.IGIG, $3);}
+        |   expr DIFDE expr     {$$=new Relational.default(@1.first_line, @1.first_column,$1, TipoR.DIFDE, $3);}
+        |   expr MEN expr       {$$=new Relational.default(@1.first_line, @1.first_column,$1, TipoR.MEN, $3);}
+        |   expr MAY expr       {$$=new Relational.default(@1.first_line, @1.first_column,$1, TipoR.MAY, $3);}
         ;
 
 

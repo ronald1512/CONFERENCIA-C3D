@@ -110,6 +110,18 @@ break;
 case 15:
 this.$=new Logical.default(_$[$0-2].first_line, _$[$0-2].first_column,$$[$0-2], TipoL.OR, $$[$0]);
 break;
+case 16:
+this.$=new Relational.default(_$[$0-2].first_line, _$[$0-2].first_column,$$[$0-2], TipoR.IGIG, $$[$0]);
+break;
+case 17:
+this.$=new Relational.default(_$[$0-2].first_line, _$[$0-2].first_column,$$[$0-2], TipoR.DIFDE, $$[$0]);
+break;
+case 18:
+this.$=new Relational.default(_$[$0-2].first_line, _$[$0-2].first_column,$$[$0-2], TipoR.MEN, $$[$0]);
+break;
+case 19:
+this.$=new Relational.default(_$[$0-2].first_line, _$[$0-2].first_column,$$[$0-2], TipoR.MAY, $$[$0]);
+break;
 case 20:
 this.$=new Constant.default(_$[$0].first_line, _$[$0].first_column, new Primitivo.default(Tipo.INTEGER, Number.parseInt($$[$0])));
 break;
@@ -275,6 +287,7 @@ parse: function parse(input) {
 
     //Expresiones
     const Arithmetic = require('../NodoAST/Arithmetic');
+    const Relational = require('../NodoAST/Relational');
     const Logical = require('../NodoAST/Logical');
     const Constant = require('../NodoAST/Constant');
 
@@ -282,6 +295,7 @@ parse: function parse(input) {
     //Enum
     const {TipoA} = require('../NodoAST/Arithmetic');
     const {TipoL} = require('../NodoAST/Logical');
+    const {TipoR} = require('../NodoAST/Relational');
     const {Tipo} = require('../Objeto/Objeto');
 
     //Objeto
