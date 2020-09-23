@@ -10,7 +10,12 @@ export default class Primitivo extends Objeto{
     }
 
     public getValue(): Object {
-        throw new Error("Method not implemented.");
+        if(this.tipo==Tipo.BOOLEAN){
+            const res= this.valor.toString().toLowerCase() === 'true';
+            return res?'1':'0';
+        }else{
+            return this.valor;
+        }
     }
     
 }
