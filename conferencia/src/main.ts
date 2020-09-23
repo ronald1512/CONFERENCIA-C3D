@@ -5,6 +5,7 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/markdown/markdown';
+//import './models/Analisis/grammar';
 
 if (environment.production) {
   enableProdMode();

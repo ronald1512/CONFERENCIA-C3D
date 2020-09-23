@@ -42,6 +42,25 @@
 
 /lex
 
+%{
+    //Expresiones
+    const Arithmetic = require('../NodoAST/Arithmetic');
+    const Relational = require('../NodoAST/Relational');
+    const Logical = require('../NodoAST/Logical');
+    const Constant = require('../NodoAST/Constant');
+
+
+    //Enum
+    const {TipoA} = require('../NodoAST/Arithmetic');
+    const {TipoL} = require('../NodoAST/Logical');
+    const {TipoR} = require('../NodoAST/Relational');
+    const {Tipo} = require('../Objeto/Objeto');
+
+    //Objeto
+    const Primitivo = require('../Objeto/Primitivo');
+    
+%}
+
 /* Asociación de operadores y precedencia */
 
 
@@ -60,16 +79,15 @@
 
 %% /* Definición de la gramática */
 
-inicio : expr EOF
-    | EOF 
+inicio : expr EOF   { return $1;}
     ;
 
-expr:   arithmetic
-    |   logical
-    |   relational
-    |   unary
-    |   constant
-    |   PARIZQ expr PARDER
+expr:   arithmetic              {$$=$1;}
+    |   logical                 {$$=$1;}
+    |   relational              {$$=$1;}
+    |   unary                   {$$=$1;}
+    |   constant                {$$=$1;}
+    |   PARIZQ expr PARDER      {$$=$2;}
     ;
 
 unary:  MENOS expr %prec UMINUS  
@@ -77,27 +95,27 @@ unary:  MENOS expr %prec UMINUS
     ;
 
 
-arithmetic: expr MAS expr
-        |   expr MENOS expr
-        |   expr POR expr
-        |   expr DIV expr
+arithmetic: expr MAS expr       {$$=new Arithmetic.default(@1.first_line, @1.first_column,$1, TipoA.MAS, $3);}
+        |   expr MENOS expr     {$$=new Arithmetic.default(@1.first_line, @1.first_column,$1, TipoA.MENOS, $3);}
+        |   expr POR expr       {$$=new Arithmetic.default(@1.first_line, @1.first_column,$1, TipoA.POR, $3);}
+        |   expr DIV expr       {$$=new Arithmetic.default(@1.first_line, @1.first_column,$1, TipoA.DIV, $3);}
         ;
 
-logical:    expr AND expr
-        |   expr OR expr
+logical:    expr AND expr       {$$=new Logical.default(@1.first_line, @1.first_column,$1, TipoL.AND, $3);}
+        |   expr OR expr        {$$=new Logical.default(@1.first_line, @1.first_column,$1, TipoL.OR, $3);}
         ;
 
-relational: expr IGIG expr
-        |   expr DIFDE expr
-        |   expr MEN expr
-        |   expr MAY expr
+relational: expr IGIG expr      {$$=new Relational.default(@1.first_line, @1.first_column,$1, TipoR.IGIG, $3);}
+        |   expr DIFDE expr     {$$=new Relational.default(@1.first_line, @1.first_column,$1, TipoR.DIFDE, $3);}
+        |   expr MEN expr       {$$=new Relational.default(@1.first_line, @1.first_column,$1, TipoR.MEN, $3);}
+        |   expr MAY expr       {$$=new Relational.default(@1.first_line, @1.first_column,$1, TipoR.MAY, $3);}
         ;
 
 
-constant:   ENTERO
-        |   DECIMAL
-        |   RTRUE
-        |   RFALSE
+constant:   ENTERO      {$$=new Constant.default(@1.first_line, @1.first_column, new Primitivo.default(Tipo.INTEGER, Number.parseInt($1)));}
+        |   DECIMAL     {$$=new Constant.default(@1.first_line, @1.first_column, new Primitivo.default(Tipo.DOUBLE, Number.parseFloat($1)));}
+        |   RTRUE       {$$=new Constant.default(@1.first_line, @1.first_column, new Primitivo.default(Tipo.BOOLEAN, true));}
+        |   RFALSE      {$$=new Constant.default(@1.first_line, @1.first_column, new Primitivo.default(Tipo.BOOLEAN, false));}
         ;
 
 
