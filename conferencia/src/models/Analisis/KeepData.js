@@ -4,6 +4,7 @@ var KeepData = /** @class */ (function () {
     function KeepData() {
         this.tmp_cnt = 0;
         this.codigo = '';
+        this.label_cnt = 0;
     }
     KeepData.getInstance = function () {
         if (!KeepData.instance) {
@@ -53,6 +54,26 @@ var KeepData = /** @class */ (function () {
     KeepData.prototype.newTemp = function () {
         var nuevo = 'T' + this.tmp_cnt++;
         return nuevo;
+    };
+    /**
+     * Funcion para generar etiquetas
+     */
+    KeepData.prototype.newLabel = function () {
+        var nuevo = 'L' + this.label_cnt++;
+        return nuevo;
+    };
+    /**
+     * Genera un salto hacia la etiqueta 'label' especificada:
+     *  goto 'label';
+     * @param {string} label
+     * @returns {string}
+     * @memberof KeepData
+     */
+    KeepData.prototype.genJump = function (label) {
+        return 'goto ' + label + ';';
+    };
+    KeepData.prototype.genIf = function (arg0, op, arg1, label) {
+        return 'if ( ' + arg0 + ' ' + op + ' ' + arg1 + ' ) goto ' + label + ';';
     };
     return KeepData;
 }());
