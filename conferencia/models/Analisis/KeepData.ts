@@ -19,6 +19,7 @@ export default class  KeepData{
         this.codigo='';
         this.label_cnt=0;
         this.node_cnt=1;    //empieza en 1 porque 'inicio' es el 0
+        this.ast_code='';
     }
 
 
@@ -58,7 +59,7 @@ export default class  KeepData{
 
 
     public getFinalASTCode(){
-        let salida='digraph G {\n\trankdir=TD;\n\t0 [label="inicio"];\n\t1 [label="instrucciones"];\n\t 0->1';
+        let salida='digraph G {\n\trankdir=TD;\n\t0 [label="inicio"];';
 
         salida+=this.ast_code;
 

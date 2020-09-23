@@ -41,6 +41,14 @@ var Arithmetic = /** @class */ (function (_super) {
         kd.addCode(kd.twoChilds(T1, left.temporal, this.tipo, right.temporal));
         return new Retorno_1.default(T1);
     };
+    Arithmetic.prototype.obtenerAscendente = function (padre) {
+        var kd = KeepData_1.default.getInstance();
+        var este = kd.getHashCode();
+        kd.addASTCode(kd.genDotName(este, this.tipo));
+        kd.addASTCode(kd.genRelation(padre, este));
+        this.izquierdo.obtenerAscendente(este);
+        this.derecho.obtenerAscendente(este);
+    };
     return Arithmetic;
 }(NodoAST_1.default));
 exports.default = Arithmetic;

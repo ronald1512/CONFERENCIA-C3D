@@ -43,6 +43,14 @@ var Logical = /** @class */ (function (_super) {
             return this.OR(left, right);
         }
     };
+    Logical.prototype.obtenerAscendente = function (padre) {
+        var kd = KeepData_1.default.getInstance();
+        var este = kd.getHashCode();
+        kd.addASTCode(kd.genDotName(este, this.tipo));
+        kd.addASTCode(kd.genRelation(padre, este));
+        this.izquierdo.obtenerAscendente(este);
+        this.derecho.obtenerAscendente(este);
+    };
     Logical.prototype.AND = function (left, right) {
         var kd = KeepData_1.default.getInstance();
         var T1 = kd.newTemp();

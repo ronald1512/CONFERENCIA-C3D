@@ -4,7 +4,7 @@
         <h4>Generador de código 3 direcciones</h4>
         <p style="font-size: 0.8em;">creado por Ronald Romero 201701048</p>
     </div>
-    
+
     <div class="row">
         <div class="col-md-12">
             <h1>Entrada</h1>
@@ -14,9 +14,20 @@
                             mode: 'javascript',
                             matchBrackets: true
                         }"></ngx-codemirror>
-                        <button class="btn btn-primary" (click)="analizar();"> Evaluar</button>
+            <button class="btn btn-primary btn-block" (click)="analizar();"> Generar código</button>
+            <p>
+                <a class="btn btn-primary btn-block" data-toggle="collapse" href="#collapseExample" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Ver código dot
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    {{ast_code}}
+                </div>
+            </div>
         </div>
-        
+
     </div>
     <div class="row">
         <div class="col-md-12">

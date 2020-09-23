@@ -5,6 +5,8 @@ var KeepData = /** @class */ (function () {
         this.tmp_cnt = 0;
         this.codigo = '';
         this.label_cnt = 0;
+        this.node_cnt = 1; //empieza en 1 porque 'inicio' es el 0
+        this.ast_code = '';
     }
     KeepData.getInstance = function () {
         if (!KeepData.instance) {
@@ -23,6 +25,34 @@ var KeepData = /** @class */ (function () {
      */
     KeepData.prototype.addCode = function (cad) {
         this.codigo += cad + '\n';
+    };
+    /**
+     *
+     * @param cad cadena a concatenar
+     */
+    KeepData.prototype.addASTCode = function (cad) {
+        this.ast_code += '\n\t' + cad;
+    };
+    KeepData.prototype.genDotName = function (raiz, nombre) {
+        return raiz + ' [label="' + nombre + '"];';
+    };
+    KeepData.prototype.genRelation = function (left, right) {
+        return left + ' -> ' + right;
+    };
+    KeepData.prototype.getFinalASTCode = function () {
+        var salida = 'digraph G {\n\trankdir=TD;\n\t0 [label="inicio"];';
+        salida += this.ast_code;
+        salida += '\n}';
+        return salida;
+    };
+    /**
+     * Sirve para simular el hashcode de cada nodo del ast
+     *
+     * @returns {number}
+     * @memberof KeepData
+     */
+    KeepData.prototype.getHashCode = function () {
+        return this.node_cnt++;
     };
     /**
      * Retorna un string de la forma:
