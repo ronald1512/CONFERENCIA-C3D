@@ -12,10 +12,13 @@ export default class  KeepData{
     public codigo:string;   //variable para almacenar el código generado
     public tmp_cnt:number;  //variable para llevar el conteo de temporales
     public label_cnt:number;  //variable para llevar el conteo de ETIQUETAS
+    public node_cnt:number; //con esata variable se manejaran los identificadores de cada nodo en el AST
+    public ast_code:string;
     private constructor(){
         this.tmp_cnt=0;
         this.codigo='';
         this.label_cnt=0;
+        this.node_cnt=1;    //empieza en 1 porque 'inicio' es el 0
     }
 
 
@@ -32,6 +35,50 @@ export default class  KeepData{
      */
     public addCode(cad: string){
         this.codigo+=cad+'\n';
+    }
+
+
+    /**
+     * 
+     * @param cad cadena a concatenar
+     */
+    public addASTCode(cad:string){
+        this.ast_code+='\n\t'+cad;
+    }
+
+
+
+    public genDotName(raiz:number,nombre:string):string{
+        return raiz+' [label="'+nombre+'"];'
+    }
+
+    public genRelation(left:number, right:number):string{
+        return left+' -> '+right ;
+    }
+
+
+    public getFinalASTCode(){
+        let salida='digraph G {\n\trankdir=TD;\n\t0 [label="inicio"];\n\t1 [label="instrucciones"];\n\t 0->1';
+
+        salida+=this.ast_code;
+
+        salida+='\n}';
+        return salida;
+    }
+
+
+
+
+
+
+    /**
+     * Sirve para simular el hashcode de cada nodo del ast
+     *
+     * @returns {number}
+     * @memberof KeepData
+     */
+    public getHashCode():number{
+        return this.node_cnt++; 
     }
 
 
