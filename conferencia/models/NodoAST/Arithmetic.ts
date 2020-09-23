@@ -26,6 +26,15 @@ export default class Arithmetic extends NodoAST{
         kd.addCode(kd.twoChilds(T1, left.temporal, this.tipo, right.temporal));
         return new Retorno(T1);
     }
+
+    public obtenerAscendente(padre: number): void {
+        const kd=KeepData.getInstance();
+        const este=kd.getHashCode();
+        kd.addASTCode(kd.genDotName(este, this.tipo))
+        kd.addASTCode(kd.genRelation(padre, este));
+        this.izquierdo.obtenerAscendente(este);
+        this.derecho.obtenerAscendente(este);
+    }
     
 }
 
