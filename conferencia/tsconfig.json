@@ -3,7 +3,7 @@
   It is not intended to be used to perform a compilation.
 
   To learn more about this file see: https://angular.io/config/solution-tsconfig.
-*/
+
 {
   "files": [],
   "references": [
@@ -12,6 +12,25 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfiganalisis.json"
     }
 ]
+}
+
+*/
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "sourceMap": false,
+    "outDir": "./src/models",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "models/**/*.ts"
+  ]
 }
