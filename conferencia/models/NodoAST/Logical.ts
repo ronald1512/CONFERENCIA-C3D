@@ -28,6 +28,15 @@ export default class Logical extends NodoAST{
         }
     }
 
+    public obtenerAscendente(padre: number): void {
+        const kd=KeepData.getInstance();
+        const este=kd.getHashCode();
+        kd.addASTCode(kd.genDotName(este, this.tipo))
+        kd.addASTCode(kd.genRelation(padre, este));
+        this.izquierdo.obtenerAscendente(este);
+        this.derecho.obtenerAscendente(este);
+    }
+
     public AND (left: Retorno, right:Retorno):Retorno{
         const kd=KeepData.getInstance();
         const T1=kd.newTemp();

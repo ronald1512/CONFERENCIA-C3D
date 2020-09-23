@@ -12,6 +12,7 @@ declare var require: any
 export class AppComponent implements OnInit {
   entrada;
   salida;
+  ast_code='';
   constructor(private httpClient: HttpClient){
 
   }
@@ -29,7 +30,11 @@ export class AppComponent implements OnInit {
     var respuesta:NodoAST=parser.parse(this.entrada);  
     KeepData.getInstance().resetAll();
     respuesta.ejecutar();
+    respuesta.obtenerAscendente(0);
     this.salida=KeepData.getInstance().codigo;
+    this.ast_code=KeepData.getInstance().getFinalASTCode();
     //console.log(this.salida);
   }
+
+  
 }

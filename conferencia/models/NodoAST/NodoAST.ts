@@ -11,4 +11,5 @@ export default abstract class NodoAST {
     }
 
     public abstract ejecutar():Retorno;
+    public abstract obtenerAscendente(padre:number):void;
 }

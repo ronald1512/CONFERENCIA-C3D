@@ -1,7 +1,11 @@
 {
   "name": "conferencia",
   "version": "0.0.0",
-  "browser": { "fs": false, "path": false, "os": false},
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
