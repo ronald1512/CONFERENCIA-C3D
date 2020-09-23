@@ -16,6 +16,12 @@ export default class  KeepData{
         this.codigo='';
     }
 
+
+    public resetAll(){
+        KeepData.instance=new KeepData();
+    }
+
+
     /**
      * Concatena codigo a el atributo 'codigo'
      *

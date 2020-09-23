@@ -19,13 +19,11 @@ export default class Arithmetic extends NodoAST{
     public ejecutar(): Retorno {
         const left = this.izquierdo.ejecutar(); 
         const right = this.derecho.ejecutar();
-        return this.suma(left,right);
-    }
-
-    private suma(left: Retorno, right: Retorno):Retorno{
+        
+        //aqui hacen falta todas las validaciones...
         const kd=KeepData.getInstance();
-        const T1=left.temporal+'+'+right.temporal;
-        kd.addCode(kd.twoChilds(T1, left.temporal, '+', right.temporal));
+        const T1=kd.newTemp();
+        kd.addCode(kd.twoChilds(T1, left.temporal, this.tipo, right.temporal));
         return new Retorno(T1);
     }
     
