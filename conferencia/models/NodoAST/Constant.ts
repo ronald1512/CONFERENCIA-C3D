@@ -21,8 +21,12 @@ export default class Constant extends NodoAST{
         const kd=KeepData.getInstance();
         const este=kd.getHashCode();    //el hashcode de esta expresion
         const hijo=kd.getHashCode();    //el hashcode del valor que almacena
-        kd.addASTCode(kd.genDotName(este,this.valor.tipo));
-        kd.addASTCode(kd.genRelation(padre, este));
+        const otroPadre=kd.getHashCode();    
+        //kd.addASTCode(kd.genDotName(este,this.valor.tipo));
+        kd.addASTCode(kd.genDotName(este,'constant'));
+        kd.addASTCode(kd.genDotName(otroPadre,'expr'));
+        kd.addASTCode(kd.genRelation(padre, otroPadre));
+        kd.addASTCode(kd.genRelation(otroPadre, este));
         if(this.valor instanceof Primitivo){
             let contenido=this.valor.valor+'';
             contenido.replace("\"", "\\\"");

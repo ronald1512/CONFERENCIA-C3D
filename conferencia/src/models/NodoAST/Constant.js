@@ -34,8 +34,12 @@ var Constant = /** @class */ (function (_super) {
         var kd = KeepData_1.default.getInstance();
         var este = kd.getHashCode(); //el hashcode de esta expresion
         var hijo = kd.getHashCode(); //el hashcode del valor que almacena
-        kd.addASTCode(kd.genDotName(este, this.valor.tipo));
-        kd.addASTCode(kd.genRelation(padre, este));
+        var otroPadre = kd.getHashCode();
+        //kd.addASTCode(kd.genDotName(este,this.valor.tipo));
+        kd.addASTCode(kd.genDotName(este, 'constant'));
+        kd.addASTCode(kd.genDotName(otroPadre, 'expr'));
+        kd.addASTCode(kd.genRelation(padre, otroPadre));
+        kd.addASTCode(kd.genRelation(otroPadre, este));
         if (this.valor instanceof Primitivo_1.default) {
             var contenido = this.valor.valor + '';
             contenido.replace("\"", "\\\"");

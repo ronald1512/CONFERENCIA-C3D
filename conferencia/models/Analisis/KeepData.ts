@@ -53,6 +53,11 @@ export default class  KeepData{
         return raiz+' [label="'+nombre+'"];'
     }
 
+    /**
+     * Genera: left -> right
+     * @param left 
+     * @param right 
+     */
     public genRelation(left:number, right:number):string{
         return left+' -> '+right ;
     }

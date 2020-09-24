@@ -36,6 +36,11 @@ var KeepData = /** @class */ (function () {
     KeepData.prototype.genDotName = function (raiz, nombre) {
         return raiz + ' [label="' + nombre + '"];';
     };
+    /**
+     * Genera: left -> right
+     * @param left
+     * @param right
+     */
     KeepData.prototype.genRelation = function (left, right) {
         return left + ' -> ' + right;
     };
