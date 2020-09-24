@@ -44,9 +44,12 @@ var Arithmetic = /** @class */ (function (_super) {
     Arithmetic.prototype.obtenerAscendente = function (padre) {
         var kd = KeepData_1.default.getInstance();
         var este = kd.getHashCode();
-        kd.addASTCode(kd.genDotName(este, this.tipo));
+        kd.addASTCode(kd.genDotName(este, 'expr'));
         kd.addASTCode(kd.genRelation(padre, este));
         this.izquierdo.obtenerAscendente(este);
+        var signo = kd.getHashCode();
+        kd.addASTCode(kd.genDotName(signo, this.tipo));
+        kd.addASTCode(kd.genRelation(este, signo));
         this.derecho.obtenerAscendente(este);
     };
     return Arithmetic;
