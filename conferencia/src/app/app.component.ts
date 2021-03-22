@@ -31,9 +31,41 @@ export class AppComponent implements OnInit {
     KeepData.getInstance().resetAll();
     respuesta.ejecutar();
     respuesta.obtenerAscendente(0);
-    this.salida=KeepData.getInstance().codigo;
+    this.salida=this.addHeaders();
     this.ast_code=KeepData.getInstance().getFinalASTCode();
-    //console.log(this.salida);
+  }
+
+  addHeaders(){
+    // encabezado de siempre
+    let salida=`#include <stdio.h> //importar para el uso de printf
+float Heap[100000]; //estructura heap
+float Stack[100000]; //estructura stack
+float SP; //puntero Stack pointer
+float HP; //puntero Heap pointer
+float `;
+
+    // declaracion de temporales
+    for (let i = 0; i < KeepData.getInstance().tmp_cnt; i++) {
+      if(i==0){
+        salida+='T'+i;
+      }else{
+        salida+=', T'+i;
+      }
+    }
+
+    salida+=`;
+    
+    
+    
+void main()
+{
+  `;
+
+    salida+=KeepData.getInstance().codigo;
+
+    salida+='printf("%f", T'+(KeepData.getInstance().tmp_cnt-1)+');\nreturn;\n}'
+
+    return salida;
   }
 
   
